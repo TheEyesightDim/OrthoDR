@@ -44,4 +44,37 @@ module ODR
     # def as_sprite
     # end
   end
+
+  # A subclass of RenderEntity specialized for animation.
+  class AnimatedEntity < RenderEntity
+    # A helper class for holding animation functions and their current frame number.
+    class Animation
+      attr_accessor :name, :fn, :frame
+
+      def initialize(name, frame = 0, &anim_fn)
+        @name = name
+        @fn = anim_fn
+        @frame = frame
+      end
+
+      def step(entity)
+        @fn.call(entity, @frame)
+        @frame += 1
+      end
+    end
+
+    def initialize(property_hash = {}, default_marker = :sprite)
+      @animation_list = []
+      super
+    end
+
+    def add_animation(name, start_frame = 0, &anim_fn)
+      @animation_list << Animation.new(name, start_frame, &anim_fn)
+    end
+
+    def next_frame
+      @animation_list.each { |anim| anim.step(self) }
+      self
+    end
+  end
 end
