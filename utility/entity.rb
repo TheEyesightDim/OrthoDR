@@ -21,12 +21,6 @@ module ODR
       @default_marker
     end
 
-    # def update_properties(property_hash)
-    #   property_hash.each do |k, v|
-    #     instance_variable_set("@#{k}", v)
-    #   end
-    # end
-
     # The `as_<primitive>` family of methods creates a shallow copy of the instance
     # with Object#dup, then returns that copy with an altered default_marker
     # def as_label
