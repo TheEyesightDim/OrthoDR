@@ -1,5 +1,7 @@
 module ODR
-  # A class which encapsulates the `$gtk.args` object and the game loop.
+  # A base class which encapsulates the `$gtk.args` object and the game loop.
+  # **Override this class** and implement your own `#game_logic` method
+  # with your game's code.
   class GameInstance
     def initialize(args)
       @args = args
@@ -10,14 +12,14 @@ module ODR
 
     def tick
       queue_input
-      calc_state
+      game_logic
       render
     end
 
     def queue_input
     end
 
-    def calc_state
+    def game_logic
     end
 
     def render
